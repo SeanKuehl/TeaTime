@@ -1,0 +1,10 @@
+Mint,3,2,3,4
+Honey,4,1,1,1
+Lemon,4,1,1,3
+Peach,4,3,2,2
+Cinnamon,3,2,3,3
+Camomille,2,1,2,2
+Hibiscus,3,3,2,1
+Ginger,2,3,1,3
+Vanilla,4,1,2,1
+Apple,3,2,2,1
