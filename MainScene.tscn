@@ -169,7 +169,15 @@ margin_top = 380.0
 margin_right = 717.0
 margin_bottom = 394.0
 text = "2           3          4           5"
+
+[node name="RemoveLastIngredient" type="Button" parent="."]
+margin_left = 776.841
+margin_top = 489.301
+margin_right = 940.841
+margin_bottom = 525.301
+text = "Remove Last Ingredient"
 [connection signal="value_changed" from="SugarsSlider" to="." method="_on_SugarsSlider_value_changed"]
 [connection signal="pressed" from="AddMilk" to="." method="_on_AddMilk_pressed"]
 [connection signal="pressed" from="AddCream" to="." method="_on_AddCream_pressed"]
 [connection signal="value_changed" from="SteepTimeSlider" to="." method="_on_SteepTimeSlider_value_changed"]
+[connection signal="pressed" from="RemoveLastIngredient" to="." method="_on_RemoveLastIngredient_pressed"]

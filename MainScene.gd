@@ -11,6 +11,12 @@ var caffieneValue = 0
 var milkAdded = false
 var creamAdded = false
 
+var lastSugarValue = 0
+var lastSteepValue = 2
+
+var ingredientList = []
+var removalList = []
+
 var ingredientGridStartX = 110
 var ingredientGridStartY = 50
 var ingredientIndex = 0
@@ -52,6 +58,8 @@ func LoadIngredientsFromFile():
 	return ingredients
 
 func HandleAddIngredient(sweet, sour, savory, caffiene):
+
+	ingredientList.append([sweet, sour, savory, caffiene])
 
 	sweetValue = sweet
 	sourValue = sour
@@ -151,8 +159,68 @@ func _on_AddMilk_pressed():
 
 func _on_SugarsSlider_value_changed(value):
 	#0,1 or 2
-	pass # Replace with function body.
+	#given that it starts at 0
+	sweetValue -= lastSugarValue
+	sweetValue += value
+	UpdateValues()
+	lastSugarValue = value
 
 
 func _on_SteepTimeSlider_value_changed(value):
-	pass # Replace with function body.
+	#2,3,4 or 5
+	if lastSteepValue == 2:
+		#no values to undo
+		pass
+	if lastSteepValue == 3:
+		sweetValue -= 1
+		sourValue -= 1
+		savoryValue -= 1
+		caffieneValue -= 1
+		UpdateValues()
+	if lastSteepValue == 4:
+		sweetValue -= 2
+		sourValue -= 2
+		savoryValue -= 2
+		caffieneValue -= 2
+		UpdateValues()
+	if lastSteepValue == 5:
+		sweetValue -= 3
+		sourValue -= 3
+		savoryValue -= 3
+		caffieneValue -= 3
+		UpdateValues()
+
+
+	if value == 3:
+		sweetValue += 1
+		sourValue += 1
+		savoryValue += 1
+		caffieneValue += 1
+		UpdateValues()
+	if value == 4:
+		sweetValue += 2
+		sourValue += 2
+		savoryValue += 2
+		caffieneValue += 2
+		UpdateValues()
+	if value == 5:
+		sweetValue += 3
+		sourValue += 3
+		savoryValue += 3
+		caffieneValue += 3
+		UpdateValues()
+
+	lastSteepValue = value
+
+
+func _on_RemoveLastIngredient_pressed():
+
+	if len(ingredientList) > 0:
+		removalList = ingredientList[-1]
+		sweetValue -= removalList[0]
+		sourValue -= removalList[1]
+		savoryValue -= removalList[2]
+		caffieneValue -= removalList[3]
+		UpdateValues()
+		ingredientList.remove(-1)
+
