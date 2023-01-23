@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://CustomerMenu.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1029.0
+margin_bottom = 604.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CustomerImage" type="Sprite" parent="."]
+position = Vector2( 269.95, 346.059 )
+scale = Vector2( 4.90209, 7.83794 )
+texture = ExtResource( 2 )
+
+[node name="CustomerMessage" type="Label" parent="."]
+margin_left = 548.0
+margin_top = 171.0
+margin_right = 928.0
+margin_bottom = 325.0
+
+[node name="BackButton" type="Button" parent="."]
+margin_left = 535.143
+margin_top = 487.575
+margin_right = 634.143
+margin_bottom = 532.575
+text = "Back"
+
+[node name="NextCustomer" type="Button" parent="."]
+margin_left = 751.579
+margin_top = 488.764
+margin_right = 869.579
+margin_bottom = 540.764
+text = "Next Customer"
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="NextCustomer" to="." method="_on_NextCustomer_pressed"]

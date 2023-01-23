@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1029.0
+margin_bottom = 605.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 528.008, 112.975 )
+scale = Vector2( 9.58459, 1.85474 )
+texture = ExtResource( 2 )
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 400.65
+margin_top = 229.271
+margin_right = 626.65
+margin_bottom = 296.271
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 403.189
+margin_top = 344.919
+margin_right = 627.189
+margin_bottom = 412.919
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 333.297
+margin_top = 428.0
+margin_right = 686.297
+margin_bottom = 577.0
+text = "Programmer: Sean Kuehl
+Swansea font: Public Domain, Roger White
+Visuals:
+Sounds:"
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -15,13 +15,22 @@ var lastSugarValue = 0
 var lastSteepValue = 2
 
 var ingredientList = []
-var removalList = []
+var ingredientObjectList = []
+
+
+var numberOfIngredients = 0
+var maxIngredients = 5
+
+
 
 var ingredientGridStartX = 110
 var ingredientGridStartY = 50
 var ingredientIndex = 0
 
 func _ready():
+
+
+
 
 	$SweetIndicator.value = sweetValue
 	$SourIndicator.value = sourValue
@@ -39,11 +48,32 @@ func _ready():
 		newIngredient.Init(ingredient[0], ingredient[1], ingredient[2], ingredient[3], ingredient[4], ingredientGridStartX, ingredientGridStartY)
 		newIngredient.connect("AddIngredient", self, "HandleAddIngredient")
 		add_child(newIngredient)
+		ingredientObjectList.append(newIngredient)
 		ingredientGridStartX += 200
 		ingredientIndex += 1
 	#passedName, sweet, sour, savory, caffiene, xPos, yPos
+	HideMainScene()
+	$CustomerMenu.Init()
+	$CustomerMenu.ShowCustomerMenu()
 
 
+
+func HideMainScene():
+
+
+	#hide Ingredients
+	for x in ingredientObjectList:
+		x.hide()
+
+	mouse_filter = MOUSE_FILTER_IGNORE
+
+func ShowMainScene():
+
+	#hide Ingredients
+	for x in ingredientObjectList:
+		x.show()
+
+	mouse_filter = MOUSE_FILTER_STOP
 
 
 func LoadIngredientsFromFile():
@@ -59,17 +89,21 @@ func LoadIngredientsFromFile():
 
 func HandleAddIngredient(sweet, sour, savory, caffiene):
 
-	ingredientList.append([sweet, sour, savory, caffiene])
+	if numberOfIngredients < maxIngredients:
+		numberOfIngredients += 1
+		UpdateNumberOfIngredientsLabel()
 
-	sweetValue = sweet
-	sourValue = sour
-	savoryValue = savory
-	caffieneValue = caffiene
 
-	$SweetIndicator.value = sweetValue
-	$SourIndicator.value = sourValue
-	$SavoryIndicator.value = savoryValue
-	$CaffieneIndicator.value = caffieneValue
+		ingredientList.append([sweet, sour, savory, caffiene])
+
+		sweetValue += sweet
+		sourValue += sour
+		savoryValue += savory
+		caffieneValue += caffiene
+		UpdateValues()
+
+		if numberOfIngredients == maxIngredients:
+			$PresentButton.text = "Present"
 
 
 func ReadLinesFromFile(fileName):
@@ -90,6 +124,8 @@ func ReadLinesFromFile(fileName):
 
 	return content
 
+func UpdateNumberOfIngredientsLabel():
+	$NumberOfIngredients.text = "Ingredients: " +str(numberOfIngredients)+"/" +str(maxIngredients)
 
 func UpdateValues():
 	#check to see if any value is above max
@@ -214,8 +250,9 @@ func _on_SteepTimeSlider_value_changed(value):
 
 
 func _on_RemoveLastIngredient_pressed():
-
-	if len(ingredientList) > 0:
+	var removalList = []
+	print((len(ingredientList)-1) > 0)
+	if (len(ingredientList)-1) > 0:
 		removalList = ingredientList[-1]
 		sweetValue -= removalList[0]
 		sourValue -= removalList[1]
@@ -223,4 +260,35 @@ func _on_RemoveLastIngredient_pressed():
 		caffieneValue -= removalList[3]
 		UpdateValues()
 		ingredientList.remove(-1)
+		numberOfIngredients -= 1
+		UpdateNumberOfIngredientsLabel()
 
+		if $PresentButton.text == "Present":
+			$PresentButton.text = "View Customer"
+
+
+func ResetForNextCustomer():
+	sweetValue = 0
+	sourValue = 0
+	savoryValue = 0
+	caffieneValue = 0
+	$SugarsSlider.value = 0
+	$AddMilk.pressed = false
+	$AddCream.pressed = false
+	$SteepTimeSlider.value = 0
+	UpdateValues()
+	numberOfIngredients = 0
+	UpdateNumberOfIngredientsLabel()
+	ingredientList = []
+
+
+
+func _on_PresentButton_pressed():
+	if numberOfIngredients == maxIngredients:
+		HideMainScene()
+		$CustomerMenu.CheckCreation(sweetValue, sourValue, savoryValue, caffieneValue)
+		ResetForNextCustomer()
+		$CustomerMenu.ShowCustomerMenu()
+	else:
+		HideMainScene()
+		$CustomerMenu.ShowCustomerMenu()
