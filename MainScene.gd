@@ -251,15 +251,15 @@ func _on_SteepTimeSlider_value_changed(value):
 
 func _on_RemoveLastIngredient_pressed():
 	var removalList = []
-	print((len(ingredientList)-1) > 0)
-	if (len(ingredientList)-1) > 0:
+
+	if (len(ingredientList)) > 0:
 		removalList = ingredientList[-1]
 		sweetValue -= removalList[0]
 		sourValue -= removalList[1]
 		savoryValue -= removalList[2]
 		caffieneValue -= removalList[3]
 		UpdateValues()
-		ingredientList.remove(-1)
+		ingredientList.pop_back()
 		numberOfIngredients -= 1
 		UpdateNumberOfIngredientsLabel()
 
