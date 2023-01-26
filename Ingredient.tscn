@@ -21,10 +21,10 @@ texture = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="NameLabel" type="Label" parent="."]
-margin_left = -35.0116
-margin_top = -60.0142
-margin_right = 33.9884
-margin_bottom = -36.0142
+margin_left = -28.0811
+margin_top = -60.0
+margin_right = 27.9189
+margin_bottom = -36.0
 grow_horizontal = 2
 custom_fonts/font = SubResource( 1 )
 text = "Name"

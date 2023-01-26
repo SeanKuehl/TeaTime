@@ -57,10 +57,19 @@ func _ready():
 	$CustomerMenu.ShowCustomerMenu()
 
 
+func _process(_delta):
+	$TeaCupSweetAmount.text = str(sweetValue)+"/"+str($SweetIndicator.max_value)
+	$TeaCupSourAmount.text = str(sourValue)+"/"+str($SourIndicator.max_value)
+	$TeaCupSavoryAmount.text = str(savoryValue)+"/"+str($SavoryIndicator.max_value)
+	$TeaCupCaffieneAmount.text = str(caffieneValue) +"/"+str($CaffieneIndicator.max_value)
 
 func HideMainScene():
 
 
+	$TeaCupSweetAmount.hide()
+	$TeaCupSourAmount.hide()
+	$TeaCupSavoryAmount.hide()
+	$TeaCupCaffieneAmount.hide()
 	#hide Ingredients
 	for x in ingredientObjectList:
 		x.hide()
@@ -69,6 +78,10 @@ func HideMainScene():
 
 func ShowMainScene():
 
+	$TeaCupSweetAmount.show()
+	$TeaCupSourAmount.show()
+	$TeaCupSavoryAmount.show()
+	$TeaCupCaffieneAmount.show()
 	#hide Ingredients
 	for x in ingredientObjectList:
 		x.show()
