@@ -19,7 +19,7 @@ func HideCustomerMenu():
 	mouse_filter = MOUSE_FILTER_IGNORE
 
 func ShowCustomerMenu():
-	rect_position = Vector2(0,0)
+	position = Vector2(0,0)
 	visible = true
 	mouse_filter = MOUSE_FILTER_STOP
 
@@ -71,8 +71,8 @@ func LoadCustomers():
 
 
 func ReadLinesFromFile(fileName):
-	var file = File.new()
-	file.open(fileName, File.READ)
+	var file = FileAccess.open(fileName, FileAccess.READ)
+	
 	var content = []
 	#check for empty lines! reading etc the file will add an empty line onto the end of it
 	var line = ""

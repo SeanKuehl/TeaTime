@@ -1,4 +1,4 @@
-extends Sprite
+extends Sprite2D
 
 var sweetValue = 0
 var sourValue = 0

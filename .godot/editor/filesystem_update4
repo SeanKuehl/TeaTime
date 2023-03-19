@@ -1,0 +1,5 @@
+res://default_env.tres
+res://MainMenu.tscn
+res://MainScene.gd
+res://CustomerMenu.gd
+res://CustomerMenu.tscn

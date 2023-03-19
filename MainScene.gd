@@ -44,9 +44,9 @@ func _ready():
 			ingredientGridStartX = 110
 			ingredientGridStartY += 150
 
-		var newIngredient = ingredientObject.instance()
+		var newIngredient = ingredientObject.instantiate()
 		newIngredient.Init(ingredient[0], ingredient[1], ingredient[2], ingredient[3], ingredient[4], ingredientGridStartX, ingredientGridStartY)
-		newIngredient.connect("AddIngredient", self, "HandleAddIngredient")
+		newIngredient.connect("AddIngredient",Callable(self,"HandleAddIngredient"))
 		add_child(newIngredient)
 		ingredientObjectList.append(newIngredient)
 		ingredientGridStartX += 200
@@ -120,8 +120,8 @@ func HandleAddIngredient(sweet, sour, savory, caffiene):
 
 
 func ReadLinesFromFile(fileName):
-	var file = File.new()
-	file.open(fileName, File.READ)
+	var file = FileAccess.open(fileName, FileAccess.READ)
+	
 	var content = []
 	#check for empty lines! reading etc the file will add an empty line onto the end of it
 	var line = ""
@@ -159,7 +159,7 @@ func _on_AddCream_pressed():
 
 		#deselect it on the menu and in code
 		milkAdded = false
-		$AddMilk.pressed = false
+		$AddMilk.button_pressed = false
 
 
 	if creamAdded == false:
@@ -189,7 +189,7 @@ func _on_AddMilk_pressed():
 
 		#deselect it on the menu and in code
 		creamAdded = false
-		$AddCream.pressed = false
+		$AddCream.button_pressed = false
 
 	if milkAdded == false:
 		milkAdded = true
@@ -286,8 +286,8 @@ func ResetForNextCustomer():
 	savoryValue = 0
 	caffieneValue = 0
 	$SugarsSlider.value = 0
-	$AddMilk.pressed = false
-	$AddCream.pressed = false
+	$AddMilk.button_pressed = false
+	$AddCream.button_pressed = false
 	$SteepTimeSlider.value = 0
 	UpdateValues()
 	numberOfIngredients = 0

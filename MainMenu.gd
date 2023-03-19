@@ -7,4 +7,4 @@ func _on_ExitButton_pressed():
 
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://MainScene.tscn")
+	get_tree().change_scene_to_file("res://MainScene.tscn")
